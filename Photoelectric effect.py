@@ -5,20 +5,24 @@ import math
 pygame.init()
 
 # Variables
-number_of_photon = 10
+number_of_photon = 1*10**14
 number_of_electrons = number_of_photon
-kinetic_energy = 'K'  # Assuming 'K' is a placeholder for the kinetic energy
-h = 6.63*10e-34
-frequency400 = 7.4 * 10e14
-Work_function_Sodium = 4.97*10e-19
-mass = 9.11 * 10e-28
+plank_constant = 6.63*10**-34
+frequency = 1.5 * 10**15
+work_function_sodium = 3.648*10**-19
+mass_electron= 9.11 * 10**-31
+
+#velocity_________________________________________________________________________________________________________
 
 
 # Equation for the velocity of the particle
-velocity = math.sqrt(2 * ((h * frequency400 - Work_function_Sodium) / mass))
+
+total_energy = plank_constant*frequency
+kinetic_energy = total_energy - work_function_sodium
+velocity = math.sqrt((2*kinetic_energy)/mass_electron)
 
 
-#set up display
+#set up display_____________________________________________________________________________________________________
 
 width, height = 800,600
 screen = pygame.display.set_mode((width, height))
@@ -45,7 +49,7 @@ side_wire_length = 80
 vertical_wire_length = 160
 long_wire_length = 683
 
-#plate locations
+#plate locations ()
 left_plate_x = width//2 - plate_width - plate_distance
 right_plate_x = width//2 + plate_distance
 plate_y = height//2 - plate_height//4
@@ -71,25 +75,19 @@ running = True
 
 
 
-# electron position
-#electron appears at left_plate_x to right_plate x 
-#other electrons appears at the same x but different y 
+# electron movement_________________________________________________________________________________________________
 
-
-
-
-# ... (previous code remains unchanged)
-
-# ... (previous code remains unchanged)
 
 # ball properties
 ball_radius = 10
 ball_color = (255, 0, 0)  # red color for the ball
 ball_x = left_plate_x + plate_width // 2  # center of the left plate
 ball_y = plate_y + plate_height // 2  # center of the left plate
-speed = velocity/100000 # adjust the speed of the ball
+speed = velocity/10000000 # adjust the speed of the ball
 
-# Light properties
+
+
+# Light properties and Light incident ray___________________________________________________________________
 LIGHT_ANGLE = 210  # in degrees
 LIGHT_LENGTH = 577
 
@@ -99,7 +97,6 @@ light_start_y = plate_y - plate_height //0.58
 light_end_x = light_start_x + LIGHT_LENGTH * math.cos(math.radians(LIGHT_ANGLE))
 light_end_y = light_start_y - LIGHT_LENGTH * math.sin(math.radians(LIGHT_ANGLE))
 
-# ... (previous code remains unchanged)
 
 # run the visuals
 running = True
@@ -133,7 +130,7 @@ while running:
     pygame.draw.rect(screen, silver, (long_wire_x, long_wire_y, long_wire_length, wire_width))
 
 
-    # draw light ray
+    
     # draw light ray
     pygame.draw.line(screen, LIGHT_COLOR, (light_start_x, light_start_y), (light_end_x, light_end_y), 2)
 
@@ -142,3 +139,19 @@ while running:
 
     # Update display
     pygame.display.flip()
+
+
+
+    #frequency variable_________________________________________________________________________________________________
+
+
+#kinetic energy display
+
+    # Render the kinetic energy text
+    font = pygame.font.Font(None, 36)
+    text = font.render(f"Kinetic Energy: {kinetic_energy:.2e} J", True, black)
+    screen.blit(text, (10, 10))
+
+x = float(input("string:"))
+
+#python docs and geeks for geeks 

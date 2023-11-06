@@ -5,7 +5,7 @@ import math
 pygame.init()
 
 # Variables
-intensity = 100 # must be a value 20,40,60,80,100
+intensity =40 # must be a value 20,40,60,80,100
 number_of_photon = 0  # define number_of_photon with a value
 number_of_electrons = number_of_photon
 plank_constant = 6.63 * 10**-34
@@ -18,7 +18,6 @@ frequency = 1.5 * 10**15
 total_energy = plank_constant * frequency  # Update the total energy value
 kinetic_energy = total_energy - work_function_sodium  # Update the kinetic energy value
 velocity = math.sqrt((2 * kinetic_energy) / mass_electron)  # Update the velocity value
-
 
 # Check the condition for intensity_________________________________________________________________________________
 if intensity == 20:
